@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Clock Work Forged</title>
+
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <!-- <h1>💖 Hello World!</h1> -->
+    <div id="clock"></div>
+    <button id="start">
+      Start
+    </button>
+    <button id="end">
+      end
+    </button>
+    <button id="clear-list">
+      Clear List
+    </button>
+    <div id="times"></div>
+    <script type="text/javascript">
+      // window.moment = require ('node_modules/moment/moment.js')
+      const moment = require('moment');
+      var start = document.getElementById('start');
+      var end = document.getElementById('end');
+      var clear = document.getElementById('clear-list');
+      var list = document.getElementById('times');
+
+      const postTime = (type) => {
+        const curDate = new Date();
+        var newDiv = document.createElement('div')
+
+        newDiv.innerHTML = `${type} ${moment(curDate).format('llll')}`;
+
+        list.append(newDiv)
+      }
+
+      start.addEventListener('click', () =>{
+        postTime('start')
+      });
+
+      end.addEventListener('click', () =>{
+        postTime('end')
+      });
+
+      clear.addEventListener('click', () => {
+        list.innerHTML = "";
+      });
+
+      var timeInterval = window.setInterval(getTime, 1000);
+
+      function getTime() {
+        const curDate = new Date()
+        document.getElementById('clock').innerHTML = moment(curDate).format('LT');
+      }
+
+      window.onload = () => {
+        getTime();
+      }
+
+    </script>
+  </body>
+</html>
