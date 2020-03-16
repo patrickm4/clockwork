@@ -52,21 +52,23 @@
       });
 
       end.addEventListener('click', () =>{
+        // TODO make sure there is a start time, maybe disable end or start
         var curTime = postTime('end')
         var startTime = localStorage.getItem('currentTime')
-        const duration = moment.duration(moment(curTime).diff(moment(startTime), 'hours', true))
+        const duration = moment.duration(moment(curTime).diff(moment(startTime)))
         var newDiv = document.createElement('div')
 
-        newDiv.innerHTML = `Duration: ${duration.asHours()} hrs`
+        newDiv.innerHTML = `Duration: ${duration.asHours().toFixed(2)} hrs`
 
         list.append(newDiv)
 
-        console.log("yaaw", duration._data.hours, duration._data, duration.asHours() )
-        console.log("yaaw2", startTime, curTime)
+        // console.log("yaaw", duration._data.hours, duration._data, duration.asHours() )
+        // console.log("yaaw2", startTime, curTime)
 
       });
 
       clear.addEventListener('click', () => {
+        // TODO Confirmation to reset
         list.innerHTML = "";
         localStorage.clear();
       });
