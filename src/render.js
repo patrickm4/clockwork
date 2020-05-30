@@ -4,6 +4,7 @@ var start = document.getElementById('start');
 var end = document.getElementById('end');
 var clear = document.getElementById('clear-list');
 var list = document.getElementById('times');
+var selectCopy = document.getElementById('select-copy');
 
 const postTime = (type) => {
   const curDate = new Date();
@@ -35,8 +36,24 @@ end.addEventListener('click', () =>{
 
   // console.log("yaaw", duration._data.hours, duration._data, duration.asHours() )
   // console.log("yaaw2", startTime, curTime)
-
 });
+
+selectCopy.addEventListener('click', () => {
+  console.log("copy", list, typeof list)
+  // list.forEach(t => {
+  //   console.log(t)
+  // })
+  // for(var t in list){
+  //   console.log(t.innerText())
+  // }
+
+  list.innerText().select()
+  document.execCommand("copy");
+  console.log(list.innerText())
+
+})
+
+
 
 clear.addEventListener('click', () => {
   // TODO Confirmation to reset
