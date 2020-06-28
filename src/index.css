@@ -5,15 +5,23 @@
   padding: 2rem;
 } */
 
-h1, h3, #clock {
+h1, h3, #clock, #date {
   color: #fff;
+}
+
+.date-box{
+  display: flex;
+  justify-content: flex-start;
 }
 
 #clock{
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-size: 15vw;
 }
-
+#date{
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 21pt;
+}
 body{
   background-color: #4A5759;
 }

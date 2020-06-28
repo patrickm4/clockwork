@@ -66,6 +66,8 @@ var timeInterval = window.setInterval(getTime, 1000);
 function getTime() {
   const curDate = new Date()
   document.getElementById('clock').innerHTML = moment(curDate).format('LT');
+
+  document.getElementById('date').innerHTML = moment(curDate).format('MMM ddd Do YYYY');
 }
 
 window.onload = () => {
