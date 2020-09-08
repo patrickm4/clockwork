@@ -39,7 +39,7 @@ end.addEventListener('click', () =>{
 });
 
 selectCopy.addEventListener('click', () => {
-  console.log("copy", list, typeof list)
+  console.log("copy", list, list.textContent)
   // list.forEach(t => {
   //   console.log(t)
   // })
@@ -47,9 +47,16 @@ selectCopy.addEventListener('click', () => {
   //   console.log(t.innerText())
   // }
 
-  list.innerText().select()
-  document.execCommand("copy");
-  console.log(list.innerText())
+  // list.textContent.writeText()
+  // list.innerText().select()
+  // document.execCommand("copy");
+  // console.log(list.innerText()
+
+  navigator.clipboard.writeText(list.textContent)
+    .then(() => {
+      console.log("success")
+    })
+    .catch(err => console.log("fail", err))
 
 })
 
