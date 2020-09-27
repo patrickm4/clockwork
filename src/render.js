@@ -1,7 +1,7 @@
 // window.moment = require ('node_modules/moment/moment.js')
 const moment = require('moment');
-var start = document.getElementById('start');
-var end = document.getElementById('end');
+// var start = document.getElementById('start');
+// var end = document.getElementById('end');
 var clear = document.getElementById('clear-list');
 var list = document.getElementById('times');
 var selectCopy = document.getElementById('select-copy');
@@ -17,13 +17,24 @@ const postTime = (type) => {
   return curDate
 }
 
-start.addEventListener('click', () =>{
+const toggleTime = (e) => {
+  if (e === 'start') {
+    start()
+  } else if (e === 'stop') {
+    stop()
+  }
+}
+
+const start = () => {
   var curTime = postTime('start')
   // console.log("yeeet", curTime)
   localStorage.setItem('currentTime', curTime);
-});
 
-end.addEventListener('click', () =>{
+  document.getElementById('start').remove();
+  createStopBtn();
+};
+
+const stop = () => {
   // TODO make sure there is a start time, maybe disable end or start
   var curTime = postTime('end')
   var startTime = localStorage.getItem('currentTime')
@@ -34,9 +45,9 @@ end.addEventListener('click', () =>{
 
   list.append(newDiv)
 
-  // console.log("yaaw", duration._data.hours, duration._data, duration.asHours() )
-  // console.log("yaaw2", startTime, curTime)
-});
+  document.getElementById('stop').remove();
+  createStartBtn();
+};
 
 selectCopy.addEventListener('click', () => {
   console.log("copy", list, list.textContent)
@@ -68,8 +79,6 @@ clear.addEventListener('click', () => {
   localStorage.clear();
 });
 
-var timeInterval = window.setInterval(getTime, 1000);
-
 function getTime() {
   const curDate = new Date()
   document.getElementById('clock').innerHTML = moment(curDate).format('LT');
@@ -77,6 +86,33 @@ function getTime() {
   document.getElementById('date').innerHTML = moment(curDate).format('MMM ddd Do YYYY');
 }
 
+function createStartBtn() {
+  var btn = document.createElement('button');
+
+  btn.classList.add('button');
+  btn.id = 'start'
+  btn.addEventListener('click', () => {
+    toggleTime('start');
+  });
+  btn.innerHTML = 'Start'
+
+  document.getElementById('btn-group').appendChild(btn)
+}
+
+function createStopBtn() {
+  var btn = document.createElement('button');
+
+  btn.classList.add('button');
+  btn.id = 'stop'
+  btn.addEventListener('click', () => {
+    toggleTime('stop');
+  });
+  btn.innerHTML = 'Stop'
+
+  document.getElementById('btn-group').appendChild(btn)
+}
+
 window.onload = () => {
   getTime();
+  createStartBtn();
 }
