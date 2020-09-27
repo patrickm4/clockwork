@@ -1,7 +1,4 @@
-// window.moment = require ('node_modules/moment/moment.js')
 const moment = require('moment');
-// var start = document.getElementById('start');
-// var end = document.getElementById('end');
 var clear = document.getElementById('clear-list');
 var list = document.getElementById('times');
 var selectCopy = document.getElementById('select-copy');
@@ -27,7 +24,6 @@ const toggleTime = (e) => {
 
 const start = () => {
   var curTime = postTime('start')
-  // console.log("yeeet", curTime)
   localStorage.setItem('currentTime', curTime);
 
   document.getElementById('start').remove();
@@ -35,7 +31,6 @@ const start = () => {
 };
 
 const stop = () => {
-  // TODO make sure there is a start time, maybe disable end or start
   var curTime = postTime('end')
   var startTime = localStorage.getItem('currentTime')
   const duration = moment.duration(moment(curTime).diff(moment(startTime)))
@@ -50,20 +45,12 @@ const stop = () => {
 };
 
 selectCopy.addEventListener('click', () => {
-  console.log("copy", list, list.textContent)
-  // list.forEach(t => {
-  //   console.log(t)
-  // })
-  // for(var t in list){
-  //   console.log(t.innerText())
-  // }
+  var reg = /<\/div><div>/g
+  var startRegex = /<div>/
+  var endRegex = /<\/div>/
 
-  // list.textContent.writeText()
-  // list.innerText().select()
-  // document.execCommand("copy");
-  // console.log(list.innerText()
-
-  navigator.clipboard.writeText(list.textContent)
+  var parsedList = list.innerHTML.replace(reg, '\n').replace(startRegex, '').replace(endRegex, '')
+  navigator.clipboard.writeText(parsedList)
     .then(() => {
       console.log("success")
     })
@@ -74,7 +61,7 @@ selectCopy.addEventListener('click', () => {
 
 
 clear.addEventListener('click', () => {
-  // TODO Confirmation to reset
+  // TODO prompt are you sure you want to clear?
   list.innerHTML = "";
   localStorage.clear();
 });
