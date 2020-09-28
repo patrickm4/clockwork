@@ -99,6 +99,8 @@ function createStopBtn() {
   document.getElementById('btn-group').appendChild(btn)
 }
 
+var timeInterval = window.setInterval(getTime, 1000);
+
 window.onload = () => {
   getTime();
   createStartBtn();
