@@ -70,7 +70,7 @@ function getTime() {
   const curDate = new Date()
   document.getElementById('clock').innerHTML = moment(curDate).format('LT');
 
-  document.getElementById('date').innerHTML = moment(curDate).format('MMM ddd Do YYYY');
+  document.getElementById('date').innerHTML = moment(curDate).format('ddd MMM Do YYYY');
 }
 
 function createStartBtn() {
