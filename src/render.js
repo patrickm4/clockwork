@@ -53,7 +53,7 @@ selectCopy.addEventListener('click', () => {
   var parsedList = list.innerHTML.replace(reg, '\n').replace(startRegex, '').replace(endRegex, '')
   navigator.clipboard.writeText(parsedList)
     .then(() => {
-      console.log("success")
+      // TODO create element then remove at the end of animation
       msgCopy.classList.add('show-success-message')
       setTimeout(() => {
         msgCopy.classList.remove('show-success-message')
