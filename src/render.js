@@ -2,6 +2,7 @@ const moment = require('moment');
 var clear = document.getElementById('clear-list');
 var list = document.getElementById('times');
 var selectCopy = document.getElementById('select-copy');
+var msgCopy = document.getElementById('copy-confirm-msg');
 
 const postTime = (type) => {
   const curDate = new Date();
@@ -53,6 +54,10 @@ selectCopy.addEventListener('click', () => {
   navigator.clipboard.writeText(parsedList)
     .then(() => {
       console.log("success")
+      msgCopy.classList.add('show-success-message')
+      setTimeout(() => {
+        msgCopy.classList.remove('show-success-message')
+      }, 2500)
     })
     .catch(err => console.log("fail", err))
 
